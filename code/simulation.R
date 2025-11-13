@@ -167,7 +167,9 @@ kbl(table3_data,
   kable_classic(full_width = FALSE) %>%
   column_spec(2, width = "4cm") %>%
   footnote(
-    general = "Note: The descriptive statistics are based on the simulated dataset with n = 10,968 observations.",
+    general = "Note: The descriptive statistics are based on 
+               the simulated dataset with n = 10,968 
+               observations.",
     general_title = ""
   ) 
 
