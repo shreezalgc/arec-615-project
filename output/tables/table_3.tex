@@ -1,0 +1,33 @@
+\begin{table}
+\centering
+\begin{talltblr}[         %% tabularray outer open
+entry=none,label=none,
+note{}={* p \num{< 0.1}, ** p \num{< 0.05}, *** p \num{< 0.01}},
+]                     %% tabularray outer close
+{                     %% tabularray inner open
+colspec={Q[]Q[]Q[]},
+column{2,3}={}{halign=c,},
+column{1}={}{halign=l,},
+hline{14}={1,2,3}{solid, black, 0.05em},
+}                     %% tabularray inner close
+\toprule
+& (1) & (2) \\ \midrule %% TinyTableHeader
+NOx & -0.002** & -0.002 \\
+& (-2.261) & (-1.574) \\
+log(pcGDP) & 0.254*** & 0.263*** \\
+& (7.121) & (7.372) \\
+E×NOx &  & -0.007*** \\
+&  & (-10.409) \\
+H×NOx &  & 0.003*** \\
+&  & (8.139) \\
+Education & -0.038*** & 0.129*** \\
+& (-3.441) & (6.635) \\
+Health & 0.381*** & 0.318*** \\
+& (38.811) & (25.196) \\
+Num.Obs. & 10968 & 10968 \\
+AIC & 27614.8 & 27509.2 \\
+BIC & 27695.2 & 27604.1 \\
+RMSE & 2.91 & 2.91 \\
+\bottomrule
+\end{talltblr}
+\end{table}
