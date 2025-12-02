@@ -96,11 +96,11 @@ p_cost <- ggplot(df_cost) +
     x = "Abatement (a)",
     y = "Cost"
   ) + 
-  theme_classic(base_size = 14) +
+  theme_classic(base_size = 18) +
   theme(
-    axis.text  = element_text(color = "black", size = 14),
+    axis.text  = element_text(color = "black", size = 18),
     axis.ticks = element_line(color = "black", linewidth = 0.8),
-    axis.title = element_text(color = "black", size = 16),
+    axis.title = element_text(color = "black", size = 18),
     axis.line  = element_line(color = "black", linewidth = 0.8)
   )
 
@@ -128,11 +128,11 @@ p_W <- ggplot(df_W, aes(x = a, y = W)) +
     x = "Abatement (a)",
     y = "W(a)"
   ) +
-  theme_classic(base_size = 14) +
+  theme_classic(base_size = 18) +
   theme(
-    axis.text  = element_text(color = "black", size = 14),
+    axis.text  = element_text(color = "black", size = 18),
     axis.ticks = element_line(color = "black", linewidth = 0.8),
-    axis.title = element_text(color = "black", size = 16),
+    axis.title = element_text(color = "black", size = 18),
     axis.line  = element_line(color = "black", linewidth = 0.8)
   ) 
 
@@ -156,11 +156,11 @@ p_emissions <- ggplot(df_Cp, aes(x = p, y = C)) +
     x = "Emissions (p)",
     y = "Total Cost C(p)"
   ) +
-  theme_classic(base_size = 14) +
+  theme_classic(base_size = 18) +
   theme(
-    axis.text  = element_text(color = "black", size = 14),
+    axis.text  = element_text(color = "black", size = 18),
     axis.ticks = element_line(color = "black", linewidth = 0.8),
-    axis.title = element_text(color = "black", size = 16),
+    axis.title = element_text(color = "black", size = 18),
     axis.line  = element_line(color = "black", linewidth = 0.8)
   ) 
 
@@ -197,11 +197,11 @@ p_MC_emissions <- ggplot(df_MC_p, aes(x = p, y = MC)) +
     x = "Emissions (p)",
     y = "Marginal Cost MC(p)"
   ) +
-  theme_classic(base_size = 14) +
+  theme_classic(base_size = 18)+
   theme(
-    axis.text  = element_text(color = "black", size = 14),
+    axis.text  = element_text(color = "black", size = 18),
     axis.ticks = element_line(color = "black", linewidth = 0.8),
-    axis.title = element_text(color = "black", size = 16),
+    axis.title = element_text(color = "black", size = 18),
     axis.line  = element_line(color = "black", linewidth = 0.8)
   ) 
 
@@ -237,35 +237,42 @@ p_cs_a <- ggplot(df_cs, aes(x = theta, y = a_star)) +
   geom_vline(xintercept = theta_star, linetype = "dashed") +
   annotate("text",
            x = theta_star, y = max(df_cs$a_star),
-           label = expression(hat(theta)), angle = 90, vjust = -0.5) +
+           label = "hat(theta)", angle = 90, vjust = -0.5, parse = TRUE) +
   labs(
     x = expression(theta),
-    y = "a* theta") +
-  theme_classic(base_size = 14) +
+    y = expression(a^"*")
+  ) +
+  theme_classic(base_size = 18) +
   theme(
-    axis.text  = element_text(color = "black", size = 14),
+    axis.text  = element_text(color = "black", size = 18),
     axis.ticks = element_line(color = "black", linewidth = 0.8),
-    axis.title = element_text(color = "black", size = 16),
+    axis.title = element_text(color = "black", size = 18),
     axis.line  = element_line(color = "black", linewidth = 0.8)
   ) 
+
 
 
 p_cs_a
 
-# tau*(theta)
+# marginal abatement cost
 p_cs_tau <- ggplot(df_cs, aes(x = theta, y = tau_star)) +
   geom_line(linewidth = 1.1) +
   geom_vline(xintercept = theta_star, linetype = "dashed") +
+  annotate("text",
+           x = theta_star, y = max(df_cs$tau_star),
+           label = "hat(theta)", angle = 90, vjust = -0.5, parse = TRUE) +
   labs(
     x = expression(theta),
-    y = "τ. θ") +
-  theme_classic(base_size = 14) + 
+    y = expression(MAC)
+  ) +
+  theme_classic(base_size = 18) +
   theme(
-    axis.text  = element_text(color = "black", size = 14),
+    axis.text  = element_text(color = "black", size = 18),
     axis.ticks = element_line(color = "black", linewidth = 0.8),
-    axis.title = element_text(color = "black", size = 16),
+    axis.title = element_text(color = "black", size = 18),
     axis.line  = element_line(color = "black", linewidth = 0.8)
   ) 
+
 
 
 p_cs_tau
@@ -292,7 +299,5 @@ ggsave("./output/figures/fig5_comparative_statics_a_theta.pdf",
 
 ggsave("./output/figures/fig6_comparative_statics_tau_theta.pdf",
        p_cs_tau, width = 7, height = 5)
-
-
 
 

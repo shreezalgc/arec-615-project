@@ -298,30 +298,33 @@ modelsummary(list(iv_model1, iv_model_full),
 
 ## 4. Calculate Key Results
 
-# Extract coefficients from the full interaction model
+# Extract coefficients
 alpha1 <- coef(model7)["NOx"]
 alpha2 <- coef(model7)["log(pcGDP)"]
-alpha3 <- coef(model7)["E_NOx"]
-alpha4 <- coef(model7)["H_NOx"]
-
-# Extract production function coefficients
 delta1 <- coef(production_model)["log(NOx)"]
 
-# Calculate effects
-direct_effect <- alpha1 / alpha2
-indirect_effect <- delta1
-net_effect <- direct_effect + indirect_effect
+pbar <- mean(sim_data$NOx, na.rm = TRUE)
+Ybar <- mean(sim_data$pcGDP, na.rm = TRUE)
 
-# Willingness to Pay calculation
-WTP <- -net_effect * mean(sim_data$pcGDP)
+# 1. Effects in utility units
+direct_effect   <- alpha1
+indirect_effect <- alpha2 * delta1 / pbar
+net_effect      <- direct_effect + indirect_effect
 
-# Optimal reduction rate (simplified)
-optimal_reduction <- 1 - (indirect_effect / abs(direct_effect))
+# 2. Convert to income-equivalent units (WTP)
+WTP <- - net_effect * (Ybar / alpha2)
 
+# 3. Optimal pollution level
+p_star <- - (alpha2 * delta1) / alpha1
+
+# 4. Optimal reduction rate
+optimal_reduction <- 1 - p_star
+
+# Print results
 cat("\n=== KEY REPLICATION RESULTS ===\n")
-cat("Direct effect (α₁/α₂):", round(direct_effect, 4), "\n")
-cat("Indirect effect (δ₁):", round(indirect_effect, 4), "\n")
-cat("Net effect:", round(net_effect, 4), "\n")
+cat("Direct effect (α₁):", round(direct_effect, 4), "\n")
+cat("Indirect effect (α₂·δ₁/p):", round(indirect_effect, 4), "\n")
+cat("Net effect (du/dp):", round(net_effect, 4), "\n")
 cat("Willingness to Pay (RMB per capita):", round(WTP, 2), "\n")
 cat("Optimal reduction rate:", round(optimal_reduction * 100, 2), "%\n")
 
